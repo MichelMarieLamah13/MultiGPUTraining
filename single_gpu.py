@@ -10,6 +10,7 @@ from torch import Tensor
 from typing import Iterator, Tuple
 import torchmetrics
 
+
 def prepare_const() -> dict:
     """Data and model directory + Training hyperparameters"""
     data_root = Path("data")
@@ -60,7 +61,7 @@ def cifar_dataset(data_root: Path) -> Tuple[Dataset, Dataset]:
 
 
 def cifar_dataloader_single(
-    trainset: Dataset, testset: Dataset, bs: int
+        trainset: Dataset, testset: Dataset, bs: int
 ) -> Tuple[DataLoader, DataLoader]:
     trainloader = DataLoader(trainset, batch_size=bs, shuffle=True, num_workers=8)
     testloader = DataLoader(testset, batch_size=bs, shuffle=False, num_workers=8)
@@ -70,11 +71,11 @@ def cifar_dataloader_single(
 
 class TrainerSingle:
     def __init__(
-        self,
-        gpu_id: int,
-        model: nn.Module,
-        trainloader: DataLoader,
-        testloader: DataLoader,
+            self,
+            gpu_id: str,
+            model: nn.Module,
+            trainloader: DataLoader,
+            testloader: DataLoader,
     ):
         self.gpu_id = gpu_id
 
@@ -140,7 +141,7 @@ class TrainerSingle:
         # save last epoch
         self._save_checkpoint(max_epochs - 1)
 
-    def test(self, final_model_path: str):
+    def test(self, final_model_path: Path):
         self.model.load_state_dict(torch.load(final_model_path))
         self.model.eval()
         with torch.no_grad():
@@ -153,7 +154,8 @@ class TrainerSingle:
             f"[GPU{self.gpu_id}] Test Acc: {100 * self.valid_acc.compute().item():.4f}%"
         )
 
-def main_single(gpu_id: int, final_model_path: str):
+
+def main_single(gpu_id: str, final_model_path: Path):
     const = prepare_const()
     train_dataset, test_dataset = cifar_dataset(const["data_root"])
     train_dataloader, test_dataloader = cifar_dataloader_single(
@@ -171,6 +173,6 @@ def main_single(gpu_id: int, final_model_path: str):
 
 
 if __name__ == "__main__":
-    gpu_id = 0
-    final_model_path =  Path("./trained_models/CIFAR10_single_epoch14.pt")
+    gpu_id = "0"
+    final_model_path = Path("./trained_models/CIFAR10_single_epoch14.pt")
     main_single(gpu_id, final_model_path)
