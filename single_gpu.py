@@ -20,7 +20,7 @@ def prepare_const() -> dict:
     os.makedirs(trained_models, exist_ok=True)
 
     const = dict(
-        trained_root=data_root,
+        data_root=data_root,
         trained_models=trained_models,
         total_epochs=15,
         batch_size=128,
