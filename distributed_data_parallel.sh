@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=mgpu_3
-#SBATCH --nodes=2
+# #SBATCH --nodes=2
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --constraint=GPURAM_Max_12GB
 #SBATCH --time=7-00:00:00
 #SBATCH --mem=16GB
