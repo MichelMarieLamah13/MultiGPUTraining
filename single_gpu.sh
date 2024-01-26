@@ -11,7 +11,7 @@
 
 
 source /etc/profile.d/conda.sh
-conda activate kiwano
+conda activate ecapa_tdnn
 
 python3 single_gpu.py
 
