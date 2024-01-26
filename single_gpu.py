@@ -7,7 +7,7 @@ from torchvision.transforms import transforms
 from torchvision.datasets import CIFAR10
 import torch.optim as optim
 from torch import Tensor
-from typing import Iterator, Tuple
+from typing import Iterator, Tuple, Union
 import torchmetrics
 
 
@@ -72,7 +72,7 @@ def cifar_dataloader_single(
 class TrainerSingle:
     def __init__(
             self,
-            gpu_id: str,
+            gpu_id: Union[int, str],
             model: nn.Module,
             trainloader: DataLoader,
             testloader: DataLoader,
