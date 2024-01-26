@@ -173,6 +173,6 @@ def main_single(gpu_id: str, final_model_path: Path):
 
 
 if __name__ == "__main__":
-    gpu_id = "0"
+    gpu_id = "cuda"
     final_model_path = Path("./trained_models/CIFAR10_single_epoch14.pt")
     main_single(gpu_id, final_model_path)
