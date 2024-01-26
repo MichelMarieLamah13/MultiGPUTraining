@@ -87,13 +87,13 @@ class TrainerSingle:
 
         self.train_acc = torchmetrics.Accuracy(
             task='multiclass',
-            num_labels=10,
+            num_classes=10,
             average='micro'
         ).to(self.gpu_id)
 
         self.valid_acc = torchmetrics.Accuracy(
             task='multiclass',
-            num_labels=10,
+            num_classes=10,
             average='micro'
         ).to(self.gpu_id)
 
